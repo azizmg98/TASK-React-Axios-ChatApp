@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import UpdateRoomModal from "./UpdateRoomModal";
 
-const ChatRoomItem = ({ room }) => {
+const ChatRoomItem = ({ room, deleteRoom }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => setIsOpen(false);
@@ -12,6 +12,7 @@ const ChatRoomItem = ({ room }) => {
 
   const handleDelete = () => {
     // call a function from app to delete a room (pass room.id as a parameter)
+    deleteRoom(room.id);
   };
   return (
     <div className="group">
