@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import MessageItem from "./MessageItem";
 
-const ChatRoom = ({ rooms }) => {
+const ChatRoom = ({ rooms, createMessage }) => {
   const roomSlug = useParams().roomSlug;
   const room = rooms.find((room) => room.slug === roomSlug);
   const messagesList = room.messages.map((msg) => {
@@ -12,7 +12,9 @@ const ChatRoom = ({ rooms }) => {
   const handleChange = (event) => {
     setMsg({ ...msg, [event.target.name]: event.target.value });
   };
-  const handleSubmit = (event) => {};
+  const handleSubmit = (event) => {
+    createMessage(room.id, msg)
+  };
 
   return (
     <div className="main__chatcontent">
@@ -31,9 +33,9 @@ const ChatRoom = ({ rooms }) => {
       <div className="content__body">
         <div className="chat__items">{messagesList}</div>
       </div>
-      <div className="content__footer">
+      <div className="content__footer" type="file" >
         <div className="sendNewMessage">
-          <button className="addFiles">
+          <button className="addFiles" >
             <i className="fa fa-plus"></i>
           </button>
           <input
